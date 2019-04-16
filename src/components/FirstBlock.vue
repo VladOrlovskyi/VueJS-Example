@@ -3,14 +3,13 @@
     <div class="button_menu_1">
       <button><img src="../../images/play-icon.svg" width="16" height="16"></button>
       <button @click="seen = true"><img src="../../images/plus-icon.svg" width="16" height="16">New</button>
-      <button @click="resetInput"><img src="../../images/cancel-icon.svg" width="16" height="16">Delete All</button>
+      <button @click="resetInput()"><img src="../../images/cancel-icon.svg" width="16" height="16">Delete All</button>
       <button @click="repostInput()"><img src="../../images/repost-right-icon.svg" width="16" height="16">Repost All
       </button>
       <div>
-        <ul v-if="seen">
-          <li v-for="(block1, idx) in blocks1" :key="idx">{{block1.text}}<br><input name="message_txt" id="txt"
-                                                                                    type="text" size="3"
-                                                                                    class="input"></li>
+        <ul v-if="seen" id="ul_txt" class="ul_class">
+          <li id="li_txt" v-for="(block1, idx) in blocks1" :key="idx">{{block1.text}}<br>
+            <input name="message_txt" id="inputTxt" type="text" size="3" class="input"></li>
         </ul>
       </div>
     </div>
@@ -55,17 +54,22 @@
         ],
         seen: false,
         resetInput () {
-          let inputText = document.getElementById('txt')
-          inputText.value = ''
+          var inputValue = document.getElementById('ul_txt').getElementsByTagName('input')
+          for (let i = 0; i < inputValue.length; i++) {
+            if (inputValue[i].type === 'text') {
+              console.log(inputValue[i].value)
+              inputValue[i].value = ''
+            }
+          }
         },
-
         repostInput () {
-          var inputTxt = document.getElementById('txt').value
-          return inputTxt
+
         }
       }
     }
   }
+
+
 </script>
 
 <style scoped>
