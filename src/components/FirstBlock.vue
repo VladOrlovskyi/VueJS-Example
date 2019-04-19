@@ -1,17 +1,22 @@
 <template>
   <div>
     <div class="button_menu_1">
-      <button @click="autoBlock()"><img src="../../images/play-icon.svg" width="16" height="16"></button>
-      <button @click="seen = true"><img src="../../images/plus-icon.svg" width="16" height="16">New</button>
-      <button @click="resetInput()"><img src="../../images/cancel-icon.svg" width="16" height="16">Delete All</button>
-      <button @click="repostInput()"><img src="../../images/repost-right-icon.svg" width="16" height="16">Repost All
+      <button @click="autoBlock('auto_li')"><img src="../../images/play-icon.svg" width="16" height="16"></button>
+      <button @click="showModalWindowOpen('block')"><img src="../../images/plus-icon.svg" width="16" height="16">New
       </button>
-      <div>
-        <ul v-if="seen" id="ul_txt" class="ul_class">
+
+      <div id="filter_modal" @click="showModalWindowOpen('none')"></div>
+      <div id="modal_window">
+        <ul id="ul_txt" class="ul_class">
           <li id="li_txt" v-for="(block1, idx) in blocks1" :key="idx">{{block1.text}}<br>
             <input name="message_txt" id="inputTxt" type="text" size="3" class="input"></li>
         </ul>
-        <ul>
+        <button @click="resetInput()"><img src="../../images/cancel-icon.svg" width="16" height="16">Delete All</button>
+        <button @click="repostInput()"><img src="../../images/repost-right-icon.svg" width="16" height="16">Repost All
+        </button>
+      </div>
+      <div>
+        <ul class="ul_repost">
           <li class="li_repost" v-for="(block3, indx) in blocks3" :key="`A-${indx}`">{{block3}}</li>
         </ul>
       </div>
@@ -27,7 +32,7 @@
       <ul id="ul_auto">
         <li v-for="(block2, idxx) in blocks2" :key="`B-${idxx}`">{{block2.text}}</li>
         <br>
-        <li class="li_auto" id="auto_li" v-for="(block4, indxx) in blocks4" :key="`C-${indxx}`">{{block4}}</li>
+        <li v-on:click="autoBlock" class="li_auto" id="auto_li" v-for="(block4, indxx) in blocks4" :key="`C-${indxx}`">{{block4.text}}</li>
       </ul>
     </div>
   </div>
@@ -77,7 +82,6 @@
         ],
         blocks3: [],
         blocks4: [],
-        seen: false,
         resetInput () {
           let inputValue = document.getElementById('ul_txt').getElementsByTagName('input')
           for (let i = 0; i < inputValue.length; i++) {
@@ -97,6 +101,39 @@
             }
           }
         },
+
+        blockAuto () {
+          let blocks5 = [
+            {text: 'Some text'},
+            {text: 'Some text'},
+            {text: 'Some text'},
+            {text: 'Some text'},
+            {text: 'Some text'},
+            {text: 'Some text'},
+            {text: 'Some text'},
+            {text: 'Some text'},
+            {text: 'Some text'},
+            {text: 'Some text'},
+            {text: 'Some text'},
+            {text: 'Some text'},
+            {text: 'Some text'},
+            {text: 'Some text'},
+            {text: 'Some text'},
+            {text: 'Some text'},
+            {text: 'Some text'},];
+          for (let i = 0; i < blocks5.length; i++) {
+            console.log(blocks5[i].text)
+            let ul_auto_ul = document.getElementById('ul_auto')
+            let li_auto_li = document.createElement('li')
+            ul_auto_ul.appendChild(li_auto_li)
+              }
+
+
+        },
+        autoBlock () {
+          setInterval(this.blockAuto, 1000)
+        },
+
         clearBlock () {
           this.blocks4 = []
 
@@ -104,9 +141,12 @@
         undoBlock () {
           this.blocks4.pop()
         },
-        autoBlock () {
-          alert("WORK! WTF???")
-        }
+
+        showModalWindowOpen (state) {
+          document.getElementById('modal_window').style.display = state
+          document.getElementById('filter_modal').style.display = state
+        },
+
       }
     }
   }
@@ -119,6 +159,27 @@
 
   .flex_box {
     display: flex;
+  }
+
+  #filter_modal {
+    background: rgba(0, 0, 0, 0.6);
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 100;
+    display: none;
+  }
+
+  #modal_window {
+    position: relative;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 150;
+    display: none;
   }
 
 </style>

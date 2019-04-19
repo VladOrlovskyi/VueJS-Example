@@ -9,7 +9,7 @@ import SecondBlock from '@/components/SecondBlock'
 Vue.config.productionTip = false
 
 Vue.component('app-first-block', FirstBlock)
-Vue.component('app-second-block', SecondBlock)
+// Vue.component('app-second-block', SecondBlock)
 
 /* eslint-disable no-new */
 new Vue({

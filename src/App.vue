@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div class="container" id="app">
     <!--<img src="./assets/logo.png">-->
     <!--<router-view/>-->
     <p>Post Trucks</p>
@@ -11,21 +11,16 @@
       </div>
 
     </div>
-    <div id="table_2">
 
-      <div id="block_2">
-        <!--<app-second-block></app-second-block>-->
-      </div>
-    </div>
 
   </div>
 </template>
 
 <script>
 
-export default {
-  name: 'App'
-}
+  export default {
+    name: 'App'
+  }
 </script>
 
 <style>
@@ -45,12 +40,14 @@ export default {
     color: white;
     background: black;
     padding: 10px;
-
-
   }
 
-  .w-50 {
-    width: 50%;
+
+  .container {
+    /*display: grid;*/
+    grid-gap: 5px;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    grid-template-rows: repeat(2, 100px);
   }
 
 
